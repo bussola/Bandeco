@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Scrollable sample</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="fragment_segunda">Segunda</string>
+    <string name="fragment_terca">Terça</string>
+    <string name="fragment_quarta">Quarta</string>
+    <string name="fragment_quinta">Quinta</string>
+    <string name="fragment_sexta">Sexta</string>
+    <string name="fragment_sabado">Sabado</string>
+</resources>
