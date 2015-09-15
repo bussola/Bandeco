@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 
 /**
@@ -25,10 +26,14 @@ public class CallSexta extends BaseFragment {
     }
 
 
+    private ListView mListView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle sis) {
         final View view = inflater.inflate(R.layout.cardapio, parent, false);
-        final BaseListAdapter adapter = new BaseListAdapter(getActivity(), 100);
+        final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 4);
+
+        mListView = findView(view, R.id.list_view);
+        mListView.setAdapter(adapter);
         return view;
     }
 

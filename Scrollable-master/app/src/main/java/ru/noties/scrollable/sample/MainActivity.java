@@ -84,31 +84,43 @@ public class MainActivity extends BaseActivity implements ConfigurationFragmentC
         final ColorRandomizer colorRandomizer = new ColorRandomizer(getResources().getIntArray(R.array.fragment_colors));
         final List<BaseFragment> list = new ArrayList<>();
 
-        CallSegunda configurationFragment
+        CallSegunda segundaFragment
                 = (CallSegunda) manager.findFragmentByTag(CallSegunda.TAG);
-        if (configurationFragment == null) {
-            configurationFragment = CallSegunda.newInstance(colorRandomizer.next());
+        if (segundaFragment == null) {
+            segundaFragment = CallSegunda.newInstance(colorRandomizer.next());
         }
 
-        CallTerca listViewFragment
+        CallTerca tercaFragment
                 = (CallTerca) manager.findFragmentByTag(CallTerca.TAG);
-        if (listViewFragment == null) {
-            listViewFragment = CallTerca.newInstance(colorRandomizer.next());
+        if (tercaFragment == null) {
+            tercaFragment = CallTerca.newInstance(colorRandomizer.next());
         }
 
-        CallQuarta scrollViewFragment
+        CallQuarta quartaFragment
                 = (CallQuarta) manager.findFragmentByTag(CallQuarta.TAG);
-        if (scrollViewFragment == null) {
-            scrollViewFragment = CallQuarta.newInstance(colorRandomizer.next());
+        if (quartaFragment == null) {
+            quartaFragment = CallQuarta.newInstance(colorRandomizer.next());
         }
 
-        CallQuinta recyclerViewFragment
+        CallQuinta quintaFragment
                 = (CallQuinta) manager.findFragmentByTag(CallQuinta.TAG);
-        if (recyclerViewFragment == null) {
-            recyclerViewFragment = CallQuinta.newInstance(colorRandomizer.next());
+        if (quintaFragment == null) {
+            quintaFragment = CallQuinta.newInstance(colorRandomizer.next());
         }
 
-        Collections.addAll(list, configurationFragment, listViewFragment, scrollViewFragment, recyclerViewFragment);
+        CallSexta sextaFragment
+                = (CallSexta) manager.findFragmentByTag(CallSexta.TAG);
+        if (sextaFragment == null) {
+            sextaFragment = CallSexta.newInstance(colorRandomizer.next());
+        }
+
+        CallSabado sabadoFragment
+                = (CallSabado) manager.findFragmentByTag(CallSabado.TAG);
+        if (sabadoFragment == null) {
+            sabadoFragment = CallSabado.newInstance(colorRandomizer.next());
+        }
+
+        Collections.addAll(list, segundaFragment, tercaFragment, quartaFragment, quintaFragment, sextaFragment,sabadoFragment);
 
         return list;
     }
@@ -127,6 +139,10 @@ public class MainActivity extends BaseActivity implements ConfigurationFragmentC
     @Override
     public void openActivity(Intent intent) {
         startActivity(intent);
+    }
+
+    private void populateListView(){
+
     }
 
 
