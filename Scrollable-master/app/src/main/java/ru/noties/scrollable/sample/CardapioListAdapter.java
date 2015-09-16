@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Dimitry Ivanov (mail@dimitryivanov.ru) on 29.03.2015.
  */
@@ -15,6 +19,11 @@ public class CardapioListAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
     private int contador;
     private int index;
+
+    //List<String> teste = Arrays.asList("sup1", "sup2", "sup3");
+    //Cardapio c = new Cardapio("segunda", "almoco", teste);
+
+    List<Cardapio> listaCardapio;
 
     final String[][] lista = {
             {"almoco segunda", "2", "3", "4", "5", "6", "janta segunda", "sehro", "lero"},
