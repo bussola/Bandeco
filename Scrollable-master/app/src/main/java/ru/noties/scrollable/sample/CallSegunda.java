@@ -30,13 +30,19 @@ public class CallSegunda extends BaseFragment {
     }
 
     private ListView mListView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle sis) {
-        final View view = inflater.inflate(R.layout.cardapio, parent, false);
+        final View view = inflater.inflate(R.layout.cardapio_duplo_horiz, parent, false);
         final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 0);
+        final CardapioListAdapter adapter1 = new CardapioListAdapter(getActivity(), 1);
+        //final ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.list_black_background, list_content);
 
-        mListView = findView(view, R.id.list_view);
+        mListView = findView(view, R.id.list_view1);
         mListView.setAdapter(adapter);
+
+        mListView = findView(view, R.id.list_view2);
+        mListView.setAdapter(adapter1);
         return view;
     }
 

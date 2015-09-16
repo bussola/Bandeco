@@ -12,6 +12,7 @@ public class Cardapio {
     private List<String> opcoes;
 
     public Cardapio(String dia, String periodo, List<String> opcoes){
+        super();
         this.dia = dia;
         this.periodo = periodo;
         this.opcoes = opcoes;

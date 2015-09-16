@@ -3,13 +3,15 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="fragment_segunda">Segunda</string>
-    <string name="fragment_terca">Terça</string>
-    <string name="fragment_quarta">Quarta</string>
-    <string name="fragment_quinta">Quinta</string>
-    <string name="fragment_sexta">Sexta</string>
-    <string name="fragment_sabado">Sabado</string>
+    <string name="fragment_segunda">Seg</string>
+    <string name="fragment_terca">Ter</string>
+    <string name="fragment_quarta">Qua</string>
+    <string name="fragment_quinta">Qui</string>
+    <string name="fragment_sexta">Sex</string>
+    <string name="fragment_sabado">Sab</string>
 
+    <string name="string_almoco">ALMOÇO</string>
+    <string name="string_janta">JANTA</string>
     <string name="cardapio_string">SheroLero</string>
 
 </resources>

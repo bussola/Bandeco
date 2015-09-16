@@ -17,15 +17,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/header_height"
-            android:background="@color/header_background"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:text="Bandeco"
+
+        <ImageView
             android:id="@+id/header"
-            android:gravity="center"/>
+            android:src="@drawable/bandeco_logo"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="@dimen/header_height"/>
+            <!--
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/header_height"
+                android:background="@drawable/garcon1"
+                android:id="@+id/header"
+                android:gravity="center_horizontal"/>
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:text="Bandeco" -->
 
         <ru.noties.scrollable.sample.TabsLayout
             android:layout_width="match_parent"
