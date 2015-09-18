@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+
+
 
 
 /**
  * Created by Dimitry Ivanov (mail@dimitryivanov.ru) on 29.03.2015.
  */
-public class CallQuarta extends BaseFragment {
+public class CallQuarta extends BaseFragment implements View.OnClickListener{
+    int periodo = 0;
 
     static final String TAG = "tag.CallQuarta";
 
@@ -27,17 +32,28 @@ public class CallQuarta extends BaseFragment {
 
 
     private ListView mListView;
-    @Override
+    TextView txtView_header;
+    Button botao;
+    public CardapioListAdapter adapterAlmoco;
+    public CardapioListAdapter adapterJanta;
+
+        @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle sis) {
-        final View view = inflater.inflate(R.layout.cardapio_duplo, parent, false);
+
+        final View view = inflater.inflate(R.layout.cardapio_botao, parent, false);
         final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 4);
+        adapterAlmoco = adapter;
         final CardapioListAdapter adapter1 = new CardapioListAdapter(getActivity(), 5);
+        adapterJanta = adapter1;
 
         mListView = findView(view, R.id.list_view1);
         mListView.setAdapter(adapter);
 
-        mListView = findView(view, R.id.list_view2);
-        mListView.setAdapter(adapter1);
+
+        txtView_header=(TextView)view.findViewById(R.id.header_Almoco_Janta);
+        botao = (Button)view.findViewById(R.id.botao);
+        botao.setOnClickListener(this);
+
         return view;
     }
 
@@ -55,4 +71,25 @@ public class CallQuarta extends BaseFragment {
     public boolean canScrollVertically(int direction) {
         return true;
     }
+
+    @Override
+    public void onClick(View v) {
+        String palavra = txtView_header.getText().toString();
+        String almoco = getResources().getString(R.string.string_almoco);
+        String janta = getResources().getString(R.string.string_janta);
+        if (v.getId() == R.id.botao){
+            if (palavra.equals(janta)){
+                txtView_header.setText(almoco);
+                botao.setText(janta);
+                mListView.setAdapter(adapterAlmoco);
+            }
+            else {
+                txtView_header.setText(janta);
+                botao.setText(almoco);
+                mListView.setAdapter(adapterJanta);
+            }
+        }
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package ru.noties.scrollable.sample;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class Cardapio {
     private List<String> opcoes;
 
     public Cardapio(String dia, String periodo, List<String> opcoes){
-        super();
+        this.opcoes = new ArrayList<>();
         this.dia = dia;
         this.periodo = periodo;
         this.opcoes = opcoes;
