@@ -12,6 +12,8 @@
 
     <string name="string_almoco">ALMOÇO</string>
     <string name="string_janta">JANTA</string>
+    <string name="string_ver_almoco">VER ALMOÇO</string>
+    <string name="string_ver_janta">VER JANTA</string>
     <string name="cardapio_string">SheroLero</string>
 
 </resources>

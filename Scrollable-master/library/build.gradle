@@ -41,6 +41,7 @@ dependencies {
     // used for debugging
 //    compile 'ru.noties:debug:1.1.3'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile files ('google-http-client-assembly-1.20.0-1.20.0.jar')
 
 }
 

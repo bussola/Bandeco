@@ -1,6 +1,7 @@
 package ru.noties.scrollable.sample;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +9,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.json.*;
-
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.Request;
-import com.android.volley.Response;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import org.json.JSONArray;
+
+//import org.apache.http.impl.client.DefaultHttpClient;
+
 /**
  * Created by Dimitry Ivanov (mail@dimitryivanov.ru) on 29.03.2015.
  */
@@ -47,9 +44,6 @@ public class CardapioListAdapter extends BaseAdapter {
 // converting json to object
     Cardapio modelObject1 = gson.fromJson(json, Cardapio.class);
 
-//perai.. tem que colocar aqui.. isso que nao manjo
-
-
 
     List<Cardapio> listaCardapio;
 
@@ -58,8 +52,8 @@ public class CardapioListAdapter extends BaseAdapter {
             {"janta segunda", "JS2", "JS3", "JS4", "JS5", "JS6"},
             {"almoco terca", "alter2", "alter3", "alter4", "alter5", "alter6", "alter7", "alter8"},
             {"janta terca", "JantaTerca2", "JantaTerca3", "JantaTerca4", "JantaTerca5", "JantaTerca6"},
-            {"almoco quarta", "AlmocoQuarta2", "AlmocoQuarta3", "AlmocoQuarta4", "AlmocoQuarta5", "AlmocoQuarta6"},
-            {"janta quarta", "sehro", "lero", "shero", "sehro", "lero"},
+            {"almoco quarta", "AlmocoQuarta2", "AlmocoQuarta3", "AlmocoQuarta4", "AlmocoQuarta5", "AlmocoQuarta6", "AlmocoQuarta7", "AlmocoQuarta8"},
+            {"janta quarta", "sehro", "lero", "shero", "sehro", "lero", "sehro", "lero", "sehro", "lero"},
             {"almoco quinta", "alseg2", "alseg3", "alseg4", "alseg5", "alseg6"},
             {"janta quinta", "sehro", "lero", "shero", "sehro", "lero"},
             {"almoco sexta", "sehro", "lero", "shero", "sehro", "lero"},
@@ -75,6 +69,42 @@ public class CardapioListAdapter extends BaseAdapter {
 //            for(int j = 0; j < this.shero[i][j].length(); j++){
 //                this.listaCardapio.add(new Cardapio())
 //            }
+//        }
+//    }
+
+
+//    class RequestTask extends AsyncTask<String, String, String> {
+//
+//        @Override
+//        protected String doInBackground(String... uri) {
+//            HttpClient httpclient = new DefaultHttpClient();
+//            HttpResponse response;
+//            String responseString = null;
+//            try {
+//                response = httpclient.execute(new HttpGet(uri[0]));
+//                StatusLine statusLine = response.getStatusLine();
+//                if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+//                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+//                    response.getEntity().writeTo(out);
+//                    responseString = out.toString();
+//                    out.close();
+//                } else{
+//                    //Closes the connection.
+//                    response.getEntity().getContent().close();
+//                    throw new IOException(statusLine.getReasonPhrase());
+//                }
+//            } catch (ClientProtocolException e) {
+//                //TODO Handle problems..
+//            } catch (IOException e) {
+//                //TODO Handle problems..
+//            }
+//            return responseString;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            super.onPostExecute(result);
+//            //Do anything with response..
 //        }
 //    }
 

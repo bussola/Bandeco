@@ -75,17 +75,19 @@ public class CallQuarta extends BaseFragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         String palavra = txtView_header.getText().toString();
+        String ver_almoco = getResources().getString(R.string.string_ver_almoco);
+        String ver_janta = getResources().getString(R.string.string_ver_janta);
         String almoco = getResources().getString(R.string.string_almoco);
         String janta = getResources().getString(R.string.string_janta);
         if (v.getId() == R.id.botao){
             if (palavra.equals(janta)){
                 txtView_header.setText(almoco);
-                botao.setText(janta);
+                botao.setText(ver_janta);
                 mListView.setAdapter(adapterAlmoco);
             }
             else {
                 txtView_header.setText(janta);
-                botao.setText(almoco);
+                botao.setText(ver_almoco);
                 mListView.setAdapter(adapterJanta);
             }
         }
