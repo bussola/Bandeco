@@ -1,23 +1,19 @@
 package ru.noties.scrollable.sample;
 
+import android.app.Activity;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.content.Intent;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-//import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
  * Created by Dimitry Ivanov (mail@dimitryivanov.ru) on 29.03.2015.
@@ -27,86 +23,54 @@ public class CardapioListAdapter extends BaseAdapter {
     private final LayoutInflater mInflater;
     private int contador;
     private int index;
+    private int periodo;
 
-    public CardapioListAdapter(Context context, int index) {
+    static String card_seg_alm = "";
+    static String card_seg_jan = "";
+    static String card_ter_alm = "";
+    static String card_ter_jan = "";
+    static String card_qua_alm = "";
+    static String card_qua_jan = "";
+    static String card_qui_alm = "";
+    static String card_qui_jan = "";
+    static String card_sex_alm = "";
+    static String card_sex_jan = "";
+    static String card_sab = "";
+
+    static List<Cardapio> cards_CardAdapter;
+    static String[][] listaCardapios = new String[12][12];
+
+    public CardapioListAdapter(Context context, int index, int periodo) {
         this.mInflater = LayoutInflater.from(context);
         this.index = index;
+        this.periodo = periodo;
     }
-
     List<String> teste = Arrays.asList("sup1", "sup2", "sup3");
-    Cardapio c = new Cardapio("segunda", "almoco", teste);
 
-    final Gson gson = new Gson();
-// original object instantiation
-    Cardapio modelObject = new Cardapio("segunda", "almoco", teste);
-// converting an object to json object
-    String json = gson.toJson(modelObject);
-// converting json to object
-    Cardapio modelObject1 = gson.fromJson(json, Cardapio.class);
+    //Recebe os cardapios da main
 
+    //depois:
+//    for(Cardapio c: cardapios){
+//        //vc pega os cardapios 1 por 1
+//        for(String s: c.opcoes){
+//            //vc pega as opçoes de cada cardapio
+//        }
+//    }
 
-    List<Cardapio> listaCardapio;
 
     final String[][] shero = {
-            {"almoco segunda1", "alseg2", "alseg3", "alseg4", "alseg5", "alseg6", "alseg7", "alseg8"},
-            {"janta segunda", "JS2", "JS3", "JS4", "JS5", "JS6"},
-            {"almoco terca", "alter2", "alter3", "alter4", "alter5", "alter6", "alter7", "alter8"},
-            {"janta terca", "JantaTerca2", "JantaTerca3", "JantaTerca4", "JantaTerca5", "JantaTerca6"},
-            {"almoco quarta", "AlmocoQuarta2", "AlmocoQuarta3", "AlmocoQuarta4", "AlmocoQuarta5", "AlmocoQuarta6", "AlmocoQuarta7", "AlmocoQuarta8"},
-            {"janta quarta", "sehro", "lero", "shero", "sehro", "lero", "sehro", "lero", "sehro", "lero"},
-            {"almoco quinta", "alseg2", "alseg3", "alseg4", "alseg5", "alseg6"},
-            {"janta quinta", "sehro", "lero", "shero", "sehro", "lero"},
-            {"almoco sexta", "sehro", "lero", "shero", "sehro", "lero"},
-            {"janta sexta", "sehro", "lero", "shero", "sehro", "lero"},
-            {"almoco sabado", "sehro", "lero", "shero", "sehro", "lero"},
-            {"janta sabado", "sehro", "lero", "shero", "sehro", "lero"},
+            {"shero", "lero"},
+            {card_seg_jan},
+            {card_ter_alm},
+            {card_ter_jan},
+            {card_qua_alm},
+            {card_qua_jan},
+            {card_qui_alm},
+            {card_qui_jan},
+            {card_sex_alm},
+            {card_sex_jan},
+            {card_sab}
     };
-
-//    public void adiciona(){
-//        for(int i= 0; i < this.shero[i].length-1; i++){
-//            String dia = shero[i][]
-//            Cardapio p = new Cardapio(shero[i][0], shero[i][1], )
-//            for(int j = 0; j < this.shero[i][j].length(); j++){
-//                this.listaCardapio.add(new Cardapio())
-//            }
-//        }
-//    }
-
-
-//    class RequestTask extends AsyncTask<String, String, String> {
-//
-//        @Override
-//        protected String doInBackground(String... uri) {
-//            HttpClient httpclient = new DefaultHttpClient();
-//            HttpResponse response;
-//            String responseString = null;
-//            try {
-//                response = httpclient.execute(new HttpGet(uri[0]));
-//                StatusLine statusLine = response.getStatusLine();
-//                if(statusLine.getStatusCode() == HttpStatus.SC_OK){
-//                    ByteArrayOutputStream out = new ByteArrayOutputStream();
-//                    response.getEntity().writeTo(out);
-//                    responseString = out.toString();
-//                    out.close();
-//                } else{
-//                    //Closes the connection.
-//                    response.getEntity().getContent().close();
-//                    throw new IOException(statusLine.getReasonPhrase());
-//                }
-//            } catch (ClientProtocolException e) {
-//                //TODO Handle problems..
-//            } catch (IOException e) {
-//                //TODO Handle problems..
-//            }
-//            return responseString;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String result) {
-//            super.onPostExecute(result);
-//            //Do anything with response..
-//        }
-//    }
 
     @Override
     public Object getItem(int position) {
@@ -123,19 +87,40 @@ public class CardapioListAdapter extends BaseAdapter {
         final View view;
 
         if (convertView == null) {
-            view = mInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+            if(periodo == 0) {
+                view = mInflater.inflate(R.layout.configuracao_cardapio_dia, parent, false);
+            }
+            else{
+                view = mInflater.inflate(R.layout.configuracao_cardapio_noite, parent, false);
+            }
         } else {
             view = convertView;
         }
 
-        ((TextView) view).setText(shero[index][position]); //Position se refere a posicao de cada linha do ListView
+        ((TextView) view).setText(listaCardapios[index][position]); //Position se refere a posicao de cada linha do ListView
 
         return view;
     }
 
     @Override
     public int getCount() {
-        contador = shero[index].length;
+        contador = listaCardapios[index].length;
         return contador;
     }
+
+
+    static void recebeCardapioDaMain(MainActivity m){
+        int i = 0, j = 0;
+        cards_CardAdapter = m.cards;
+        for(Cardapio c: cards_CardAdapter){
+            List<String> st = c.getOpcoes();
+            j = 0;
+            for(String s: st){
+                listaCardapios[i][j] = s;
+                j++;
+            }
+            i++;
+        }
+    }
 }
+

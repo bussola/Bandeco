@@ -1,23 +1,26 @@
 package ru.noties.scrollable.sample;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.JsonArray;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
+//import java.lang.reflect.Type;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -28,19 +31,30 @@ import ru.noties.scrollable.ScrollableLayout;
 
 public class MainActivity extends BaseActivity implements ConfigurationFragmentCallbacks {
 
+    static String cardapio_segunda_almoco;
+    static String cardapio_segunda_janta;
+    static String cardapio_terca_almoco;
+    static String cardapio_terca_janta;
+    static String cardapio_quarta_almoco;
+    static String cardapio_quarta_janta;
+    static String cardapio_quinta_almoco;
+    static String cardapio_quinta_janta;
+    static String cardapio_sexta_almoco;
+    static String cardapio_sexta_janta;
+    static String cardapio_sabado;
 
     private static final String ARG_LAST_SCROLL_Y = "arg.LastScrollY";
-
     private ScrollableLayout mScrollableLayout;
 
-    JSONObject lero = new JSONObject();
-
-    public String resposta = "";
+    public String json = "";
+    public List<Cardapio> cards;
+    Bundle bundle = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getCardapio();
 
+        //savedInstanceState.putString("json", json);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -91,28 +105,31 @@ public class MainActivity extends BaseActivity implements ConfigurationFragmentC
         }
     }
 
-    public List<Cardapio> getCardapio(){
+    public void getCardapio(){
+        RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://192.168.1.30:8080/bandeco";
-        final String fdp = "fdp";
-
-        List<Cardapio> c = new ArrayList<Cardapio>();
-        JsonArray j = new JsonArray();
-        JsonArrayRequest jsObjRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        resposta = response.toString();
+                    public void onResponse(String response) {
+                        json = response;
+                        Type listOfObjects = new TypeToken<List<Cardapio>>(){}.getType();
+                        Gson gson = new GsonBuilder().create();
+                        cards = gson.fromJson(json, listOfObjects);
+                        bundle.putString("json", json); //Aqui coloca o json no bundle
+                        CardapioListAdapter.recebeCardapioDaMain(MainActivity.this);
+                        //bundle.putString("json", json);
                     }
                 }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO Auto-generated method stub
-                        resposta = error.toString();
-                    }
-                });
-
-        return c;
+                json = "Erro";
+            }
+        });
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
     }
 
     @Override
@@ -127,39 +144,35 @@ public class MainActivity extends BaseActivity implements ConfigurationFragmentC
         final ColorRandomizer colorRandomizer = new ColorRandomizer(getResources().getIntArray(R.array.fragment_colors));
         final List<BaseFragment> list = new ArrayList<>();
 
+
         CallSegunda segundaFragment = (CallSegunda) manager.findFragmentByTag(CallSegunda.TAG);
         if (segundaFragment == null) {
-            segundaFragment = CallSegunda.newInstance(colorRandomizer.next());
+            segundaFragment = CallSegunda.newInstance();
         }
 
-        CallTerca tercaFragment
-                = (CallTerca) manager.findFragmentByTag(CallTerca.TAG);
+        CallTerca tercaFragment = (CallTerca) manager.findFragmentByTag(CallTerca.TAG);
         if (tercaFragment == null) {
-            tercaFragment = CallTerca.newInstance(colorRandomizer.next());
+            tercaFragment = CallTerca.newInstance();
         }
 
-        CallQuarta quartaFragment
-                = (CallQuarta) manager.findFragmentByTag(CallQuarta.TAG);
+        CallQuarta quartaFragment = (CallQuarta) manager.findFragmentByTag(CallQuarta.TAG);
         if (quartaFragment == null) {
-            quartaFragment = CallQuarta.newInstance(colorRandomizer.next());
+            quartaFragment = CallQuarta.newInstance();
         }
 
-        CallQuinta quintaFragment
-                = (CallQuinta) manager.findFragmentByTag(CallQuinta.TAG);
+        CallQuinta quintaFragment = (CallQuinta) manager.findFragmentByTag(CallQuinta.TAG);
         if (quintaFragment == null) {
-            quintaFragment = CallQuinta.newInstance(colorRandomizer.next());
+            quintaFragment = CallQuinta.newInstance();
         }
 
-        CallSexta sextaFragment
-                = (CallSexta) manager.findFragmentByTag(CallSexta.TAG);
+        CallSexta sextaFragment = (CallSexta) manager.findFragmentByTag(CallSexta.TAG);
         if (sextaFragment == null) {
             sextaFragment = CallSexta.newInstance(colorRandomizer.next());
         }
 
-        CallSabado sabadoFragment
-                = (CallSabado) manager.findFragmentByTag(CallSabado.TAG);
+        CallSabado sabadoFragment = (CallSabado) manager.findFragmentByTag(CallSabado.TAG);
         if (sabadoFragment == null) {
-            sabadoFragment = CallSabado.newInstance(colorRandomizer.next());
+            sabadoFragment = CallSabado.newInstance();
         }
 
         Collections.addAll(list, segundaFragment, tercaFragment, quartaFragment, quintaFragment, sextaFragment,sabadoFragment);
@@ -182,10 +195,4 @@ public class MainActivity extends BaseActivity implements ConfigurationFragmentC
     public void openActivity(Intent intent) {
         startActivity(intent);
     }
-
-    private void populateListView(){
-
-    }
-
-
 }

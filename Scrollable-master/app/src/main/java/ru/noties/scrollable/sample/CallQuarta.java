@@ -1,30 +1,24 @@
 package ru.noties.scrollable.sample;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
-
-
 
 /**
  * Created by Dimitry Ivanov (mail@dimitryivanov.ru) on 29.03.2015.
  */
 public class CallQuarta extends BaseFragment implements View.OnClickListener{
-    int periodo = 0;
-
     static final String TAG = "tag.CallQuarta";
 
-    public static CallQuarta newInstance(int color) {
+    public static CallQuarta newInstance() {
         final Bundle bundle = new Bundle();
-        bundle.putInt(ARG_COLOR, color);
-
         final CallQuarta fragment = new CallQuarta();
         fragment.setArguments(bundle);
         return fragment;
@@ -32,23 +26,24 @@ public class CallQuarta extends BaseFragment implements View.OnClickListener{
 
 
     private ListView mListView;
-    TextView txtView_header;
-    Button botao;
-    public CardapioListAdapter adapterAlmoco;
-    public CardapioListAdapter adapterJanta;
+    private TextView txtView_header;
+    private Button botao;
+    private CardapioListAdapter adapterAlmoco;
+    private CardapioListAdapter adapterJanta;
+    static String lista_quarta_almoco = "";
+    public String lista_quarta_janta = "";
 
-        @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle sis) {
 
         final View view = inflater.inflate(R.layout.cardapio_botao, parent, false);
-        final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 4);
+        final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 4, 0);
         adapterAlmoco = adapter;
-        final CardapioListAdapter adapter1 = new CardapioListAdapter(getActivity(), 5);
+        final CardapioListAdapter adapter1 = new CardapioListAdapter(getActivity(), 5, 1);
         adapterJanta = adapter1;
 
-        mListView = findView(view, R.id.list_view1);
+        mListView = findView(view, R.id.list_view_cardapio);
         mListView.setAdapter(adapter);
-
 
         txtView_header=(TextView)view.findViewById(R.id.header_Almoco_Janta);
         botao = (Button)view.findViewById(R.id.botao);
@@ -80,15 +75,21 @@ public class CallQuarta extends BaseFragment implements View.OnClickListener{
         String almoco = getResources().getString(R.string.string_almoco);
         String janta = getResources().getString(R.string.string_janta);
         if (v.getId() == R.id.botao){
-            if (palavra.equals(janta)){
+            if (palavra.equals(janta)){ //Caso Almoco
                 txtView_header.setText(almoco);
+                txtView_header.setBackgroundColor(Color.WHITE);
+                txtView_header.setTextColor(Color.BLACK);
                 botao.setText(ver_janta);
                 mListView.setAdapter(adapterAlmoco);
+                mListView.setBackgroundColor(Color.WHITE);
             }
-            else {
+            else { //Caso Janta
                 txtView_header.setText(janta);
+                txtView_header.setBackgroundColor(Color.BLACK);
+                txtView_header.setTextColor(Color.WHITE);
                 botao.setText(ver_almoco);
                 mListView.setAdapter(adapterJanta);
+                mListView.setBackgroundColor(Color.BLACK);
             }
         }
     }

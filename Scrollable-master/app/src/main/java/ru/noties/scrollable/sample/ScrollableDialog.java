@@ -54,7 +54,7 @@ public class ScrollableDialog extends DialogFragment {
         scrollableLayout.setFriction(getArguments().getFloat(ARG_FRICTION, BuildConfig.START_FRICTION));
 
         final ListView listView = (ListView) view.findViewById(R.id.list_view);
-        final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 50);
+        final CardapioListAdapter adapter = new CardapioListAdapter(getActivity(), 50, 0);
         listView.setAdapter(adapter);
 
         scrollableLayout.setCanScrollVerticallyDelegate(new CanScrollVerticallyDelegate() {

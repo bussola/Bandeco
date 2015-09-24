@@ -42,7 +42,7 @@ public class ScrollableFragment extends Fragment {
         final ViewPagerAdapter adapter = new ViewPagerAdapter(
                 getChildFragmentManager(),
                 getResources(),
-                Arrays.asList(CallSegunda.newInstance(0x80FF0000), CallSabado.newInstance(0x8000FF00))
+                Arrays.asList(CallSegunda.newInstance(), CallSabado.newInstance())
         );
         pager.setAdapter(adapter);
         tabsLayout.setViewPager(pager);

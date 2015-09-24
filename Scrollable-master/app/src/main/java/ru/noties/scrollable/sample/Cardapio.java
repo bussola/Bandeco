@@ -18,4 +18,14 @@ public class Cardapio {
         this.periodo = periodo;
         this.opcoes = opcoes;
     }
+
+    public String getDia(){
+        return dia;
+    }
+    public String getPeriodo(){
+        return periodo;
+    }
+    public List<String> getOpcoes(){
+        return opcoes;
+    }
 }
