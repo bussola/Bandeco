@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Bandeco</string>
+
+    <string name="action_settings">Sobre</string>
+    <string name="saldo_settings">Saldo</string>
+
+    <string name="fragment_segunda">Seg</string>
+    <string name="fragment_terca">Ter</string>
+    <string name="fragment_quarta">Qua</string>
+    <string name="fragment_quinta">Qui</string>
+    <string name="fragment_sexta">Sex</string>
+    <string name="fragment_sabado">Sab</string>
+
+    <string name="string_almoco">ALMOÇO</string>
+    <string name="string_janta">JANTA</string>
+    <string name="string_ver_almoco">VER ALMOÇO</string>
+    <string name="string_ver_janta">VER JANTA</string>
+    <string name="cardapio_string">SheroLero</string>
+
+    <string name="shero">SheroLero</string>
+
+
+    <string name="sobre_titulo">Desenvolvedores: </string>
+    <string name="crewbussola">Vinicius Bussola, Tales de Padua e Diego Yamada</string>
+    <string name="codigo_fonte">Código fonte:</string>
+    <string name="codigo_fonte1">github.com/bussola/Bandeco</string>
+    <string name="contato">Contato:</string>
+    <string name="contato_bussola">vbussola@yahoo.com</string>
+    <string name="contato_crew">talescpadua@gmail.com</string>
+    <string name="contato_pirata">diegoyamada89@gmail.com</string>
+    <string name="versao">versão 0.0.1 pré-alpha</string>
+    <string name="atualizacoes">Nào percam as proximas atualizações!</string>
+
+
+    <string name="saldo_usuario">Número USP: </string>
+    <string name="saldo_senha">Senha: </string>
+    <string name="primeiro">Primeiro acesso </string>
+    <string name="esqueci">Esqueci minha senha </string>
+
+</resources>
